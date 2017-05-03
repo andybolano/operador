@@ -1,0 +1,89 @@
+<ion-view view-title="Nueva reserva" style="background-color:#F3F3F4">
+    <ion-nav-buttons side="right">
+
+    </ion-nav-buttons>
+    <div class="row bar bar-subheader degrade-birrias-header">
+        <div class="col col-10">
+            <a class="button button-icon button-positive icon ion-ios-arrow-left" style="padding-top: 0" ng-click="vm.moveToFecha('-')"></a>
+        </div>
+        <div class="col col-50">
+            <input type="date" ng-model="vm.fecha" style="background-color:#e34243;color:#FFF;padding-left:5px;" id="fechaReserva" ng-change="vm.getAgendaDiaByCancha()">
+        </div>
+        <div class="col col-30" style="padding-top:8px;">
+            {{vm.diaSemana}}
+        </div>
+        <div class="col col-10">
+            <a class="button button-icon button-positive icon ion-ios-arrow-right" style="padding-top: 0" ng-click="vm.moveToFecha('+')"></a>
+        </div>
+    </div>
+
+    <ion-content overflow-scroll="true" class="center has-subheader has-footer">
+        <ion-tabs class="tabs-transparent tabs-icon-top">
+            <ion-tab ng-repeat="item in vm.Canchas| orderBy:'id'" ng-click="changeSlide({{$index}});" title="{{item.nombre}}" >
+            </ion-tab>
+        </ion-tabs>
+        <ion-slide-box on-slide-changed="slideChanged(index);changetab(index)">
+            <ion-slide ng-repeat="item in vm.Canchas| orderBy:'id'"  style="width: 0px">
+                <div>
+                    <ul style="padding-top: 40px;">
+                        <li ng-repeat="h in vm.horas" id="{{h}}"> 
+                            <span ng-if="vm.comprobarReservada(h, item.id) == false" class="item item-checkbox hora" ng-click="vm.cargarReserva(h, item.id);" >
+                                <div class="row disponible">
+                                    <div class="col col-40">
+                                        {{h}}:00
+                                    </div>
+                                    <div class="col col-60" style="text-align: left">
+                                        RESERVAR
+                                    </div>
+                                    <label class="checkbox ">
+                                        <input type="checkbox" id='check_{{item.id}}_{{h}}_{{vm.Fecha_r}}'>
+                                    </label>
+                                </div>
+                            </span>
+                            <a ng-if="vm.comprobarReservada(h, item.id) == true" ng-click="vm.viewReserva(h, item.id)">
+                                <div class="row hora reservada " >
+                                    <div class="col col-40" style="padding-left:60px;">
+                                        {{h}}:00
+                                    </div>
+                                    <div class="col col-60" style="text-align: left;padding-left:29px;">
+                                        RESERVADA
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+
+    <div class="bar bar-footer" >
+        <div class="row">
+            <div class="col">
+                <button class="button icon-right ion-chevron-up button-outline button-balanced" ng-click="vm.showReservasCargadas();" style="border:0;" ng-if="vm.reservaMover.existe == true">
+                    <span class="badge badge-balanced">{{vm.RESERVA.length}}</span> Actualizacion de Reserva
+                </button>
+                <button class="button icon-right ion-chevron-up button-outline button-positive" ng-click="vm.showReservasCargadas();" style="border:0;" ng-if="vm.reservaMover.existe == false">
+                    <span class="badge badge-positive">{{vm.RESERVA.length}}</span> Reservar
+                </button>
+            </div>
+        </div>
+    </div>
+    <script id="modalReserva.html" type="text/ng-template">
+        <div class="modal">
+        <ion-pane>  
+        <ng-include src="'app/reservar/modalReserva.html'"></ng-include>
+        </ion-pane>
+        </div>
+    </script>
+    <script id="modalReservaCargadas.html" type="text/ng-template">
+        <div class="modal">
+        <ion-pane>  
+        <ng-include src="'app/reservar/modalReservasCargadas.html'"></ng-include>
+        </ion-pane>
+        </div>
+    </script>
+</ion-view>
+
+
+

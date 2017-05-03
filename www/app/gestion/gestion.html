@@ -1,0 +1,100 @@
+<ion-view  view-title="Gestión de reservas" style="background-color:#F3F3F4">
+    <ion-nav-buttons side="right">
+
+    </ion-nav-buttons>
+    <div class="bar bar-subheader degrade-birrias-header">
+        <label class="item item-input" style="background-color:#e34243; width: 90%;margin-left:5%;margin-top:-5px;">
+            <i class="icon ion-ios-search placeholder-icon" style='color:#FFF'></i>
+            <input type="text" placeholder="Buscar..." ng-model="filtro" style="color:#FFF;">
+        </label>
+        <b style="width:15%;text-align: center;margin-top:5px;">{{vm.reservas.length}}</b>
+    </div>
+    <ion-content overflow-scroll="true" class="center has-subheader">
+        <ion-tabs class="tabs-transparent tabs-icon-top">
+            <ion-tab  ng-click="changeSlide(0);" title="Solicitudes <span class='notificacion'>{{vm.nuevasSolicitudes.length}}</span>" >
+            </ion-tab>
+            <ion-tab  ng-click="changeSlide(1);" title="Esperando <span class='notificacion'>{{vm.esperandoConfirmacion.length}}</span>">
+            </ion-tab>
+            <ion-tab  ng-click="changeSlide(2);" title="Confirmadas <span class='notificacion'>{{vm.confirmadas.length}}</span>" >
+            </ion-tab>
+        </ion-tabs>
+        <ion-slide-box on-slide-changed="slideChanged(index);changetab(index)" style="padding-top:44px;">
+            <ion-slide>
+                    <ion-content>
+                        <ion-refresher
+                            pulling-text="Actualizar Información..."
+                            on-refresh="vm.getReservas()">
+                        </ion-refresher>
+                        <div ng-if="vm.nuevasSolicitudes.length == 0" style='text-align: center;padding-top:30%'>
+                             <i class='ion-android-radio-button-off vacio'></i>
+                            <h4 class='text-info'>No hay nuevas solicitdes</h4>
+                        </div>
+                        <div ng-if="vm.nuevasSolicitudes.length > 0">
+                            <ul class="list alert">
+                                <li class="item" ng-repeat="item in vm.nuevasSolicitudes| filter: filtro | orderBy : ['fecha', 'hora'] " style="border-bottom:1px solid #e0e0e0;font-size:14px;color:#FFF; padding:8px;" ng-click="vm.viewReserva(item);">
+                                    <h4 style="font-size:13px;color:#FFF">{{item.fecha}} {{item.diaSemana}} - <span style="color:#FFF">{{item.hora}}:00</span> </h4>
+                                    {{item.nombres}} {{item.apellidos}} 
+                                    <span class="badge badge-positive" style="font-size:12px;position:absolute">{{item.nombrecancha}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </ion-content>
+            </ion-slide>
+            <ion-slide>
+                    <ion-content>
+                        <ion-refresher
+                            pulling-text="Actualizar Información..."
+                            on-refresh="vm.getReservas()">
+                        </ion-refresher>
+                        <div ng-if="vm.esperandoConfirmacion.length == 0" style='text-align: center;padding-top:30%'>
+                            <i class='ion-android-radio-button-off vacio'></i>
+                            <h4 class='text-info'>No hay reservas esperando</h4>
+                        </div>
+                        <div ng-if="vm.esperandoConfirmacion.length > 0">
+                            <ul class="list">
+                                <li class="item" ng-repeat="item in vm.esperandoConfirmacion| filter: filtro | orderBy : ['fecha', 'hora'] " style="border-bottom:1px solid #e0e0e0;font-size:14px; padding:8px;" ng-click="vm.viewReserva(item);">
+                                    <h4 class='text-danger' style="font-size:12px">{{item.fecha}} {{item.diaSemana}} - <span class='text-success'>{{item.hora}}:00</span> </h4>
+                                    {{item.nombres}} {{item.apellidos}} 
+                                    <span class="badge badge-positive" style="font-size:11px;position:absolute">{{item.nombrecancha}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                </ion-content>
+            </ion-slide>
+            <ion-slide>
+                <ion-content>
+                        <ion-refresher
+                            pulling-text="Actualizar Información..."
+                            on-refresh="vm.getReservas()">
+                        </ion-refresher>
+                        <div ng-if="vm.confirmadas.length == 0" style='text-align: center;padding-top:30%'>
+                             <i class='ion-android-radio-button-off vacio'></i>
+                            <h4 class='text-info'>No hay reservas confirmadas</h4>
+                        </div>
+                        <div ng-if="vm.confirmadas.length > 0">
+                            <ul class="list">
+
+                                <li class="item" ng-repeat="item in vm.confirmadas| filter: filtro | orderBy : ['fecha', 'hora'] " style="border-bottom:1px solid #e0e0e0;font-size:14px; padding:8px;" ng-click="vm.viewReserva(item);">
+                                    <div ng-if="item.estado == 'confirmadaconabono'" title="Con Abono" class="triangulo_top_right"> </div>
+                                    <h4 class='text-danger' style="font-size:12px">{{item.fecha}} {{item.diaSemana}} - <span class='text-success'>{{item.hora}}:00</span> </h4>
+                                    {{item.nombres}} {{item.apellidos}} 
+                                    <span class="badge badge-positive" style="font-size:11px;position:absolute">{{item.nombrecancha}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                </ion-content>
+            </ion-slide>
+        </ion-slide-box>   
+    </ion-content>
+    <script id="modalReserva.html" type="text/ng-template">
+        <div class="modal">
+        <ion-pane>  
+        <ng-include src="'app/gestion/modalReserva.html'"></ng-include>
+        </ion-pane>
+        </div>
+    </script>
+</ion-view>
+
+
+
+

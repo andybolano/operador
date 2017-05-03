@@ -1,0 +1,31 @@
+<ion-side-menu side="left" ng-controller="MenuCtrl as vm" class="bg-menu">
+    <ion-header-bar class="bar bar-energized">
+        <div class="row" style="margin-top:5px;">
+            <div class="col-10">
+                <img src="img/logo_min.png" style="width:25px;height: 25px;"> 
+            </div> 
+            <div class="col-90" style="padding-top:3px;padding-left:5px;">
+                <h4 style="color:#FFF;margin-top:0px;">Birrias para sitios</h4>
+            </div>
+        </div>
+    </ion-header-bar>
+    <ion-content class="custom content-menu has-header">
+        <div style="height:100px;padding-top:10px;">
+            <a class="item item-thumbnail-left" menu-toggle="left"  style="background-color: transparent;border:0">
+               
+                <img src="img/profile-sitio.png" style="border-radius:50%;width:60px;height: 60px" ng-if="vm.sitio.image == 0">
+                <img src="{{vm.sitio.ruta}}" style="border-radius:50%;width:60px;height: 60px" ng-if="vm.sitio.image == 1">
+                <h2 style="font-weight:600;color:#FFF;font-size:14px;">{{vm.sitio.nombre}}</h2>
+                <p style="color:#FFF;font-size:12px;">{{vm.sitio.email}}</p>
+                <p style="color:#FFF;font-size:12px;">{{vm.sitio.telefono}}</p>
+              </a>
+        </div>
+        <ion-list>
+            <ion-item  menu-toggle="left" ui-sref="usuario.home"  ng-class="{active : vm.isActive ('/usuario/home')}" ><i class="icon ion-android-home" style="padding-right:5px;"></i> Inicio</ion-item>  
+            <ion-item  menu-toggle="left" ui-sref="usuario.reservar"  ng-class="{active : vm.isActive ('/usuario/reservar')}"><i class="icon ion-ios-football" style="padding-right:5px;"></i>Nueva reserva</ion-item> 
+            <ion-item  menu-toggle="left" ui-sref="usuario.gestion"  ng-class="{active : vm.isActive ('/usuario/gestionReservas')}"><i class="icon ion-android-calendar" style="padding-right:5px;"></i>Gestión de reservas</ion-item> 
+            <ion-item  menu-toggle="left" ui-sref="usuario.historial"  ng-class="{active : vm.isActive ('/usuario/historial')}"><i class="icon ion-clock" style="padding-right:5px;"></i> Historial de reservas</ion-item>   
+            <ion-item  menu-toggle="left" href="javascript:;" ng-click="vm.logout();"><i class="icon ion-android-exit" style="padding-right:5px;color:#FF7701"></i> <span style="color:#FF7701">Cerrar Sesión</span></ion-item>
+        </ion-list>
+    </ion-content>
+</ion-side-menu>

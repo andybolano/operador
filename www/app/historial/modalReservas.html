@@ -1,0 +1,30 @@
+ <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-assertive">
+      <h1 class="title">Listado de Reservas</h1>
+      <button class="button button-clear button-positive" ng-click="vm.closeModal();"><i class="ion ion-close" style="color:#FFF"></i></button>
+    </ion-header-bar>
+     <div class="bar bar-subheader bar-assertive">
+        
+            <label class="item item-input" style="background-color:#b71c1c; width: 90%;margin-left:5%;margin-top:-5px;">
+              <i class="icon ion-ios-search placeholder-icon" style='color:#FFF'></i>
+              <input type="text" placeholder="Buscar..." ng-model="filtro" style="color:#FFF;">
+            </label>
+          
+
+     </div>
+    <ion-content class="has-subheader">
+        <div ng-if="vm.reservas.length == 0" style='text-align: center;padding-top:30%'>
+              <i class='ion-android-radio-button-off vacio'></i>
+             <h4 class='text-info'>No hay reservas en estas fechas</h4>
+        </div>
+        <div ng-if="vm.reservas.length > 0">
+            <ul class="list">
+                <li class="item" ng-repeat="item in vm.reservas | filter: filtro | orderBy : ['fecha', 'hora'] " style="border-bottom:1px solid #e0e0e0;" ng-click="vm.viewReserva(item);">
+                    <h4 class='text-danger'>{{item.fecha}} {{item.diaSemana}} - <span class='text-success'>{{item.hora}}:00</span> </h4>
+                    {{item.nombres}} {{item.apellidos}} 
+                </li>
+            </ul>
+        </div>
+    </ion-content>
+  </ion-modal-view>
+

@@ -1,0 +1,94 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-assertive" ng-if="vm.reservaMover.existe == false">
+        <h1 class="title">Registro de Reserva</h1>
+        <button class="button button-clear button-positive" ng-click="vm.closeModal();"><i class="ion ion-close" style="color:#FFF"></i></button>
+    </ion-header-bar>
+    <ion-header-bar class="bar bar-header bar-balanced" ng-if="vm.reservaMover.existe == true">
+        <h1 class="title">Actualización de Reserva</h1>
+        <button class="button button-clear button-positive" ng-click="vm.closeModal();"><i class="ion ion-close" style="color:#FFF"></i></button>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="center has-header has-footer">
+        <div ng-if="vm.RESERVA.length == 0" style='text-align: center;padding-top:30%'>
+             <i class='ion-android-radio-button-off vacio'></i>
+            <h4 class='text-info'>No hay reservas cargadas</h4>
+        </div>
+        <div ng-if="vm.RESERVA.length > 0">
+            <ul class="list">
+                <li class="item" ng-repeat="item in vm.RESERVA | filter: filtro | orderBy : ['fecha', 'hora'] " style="border-bottom:1px solid #e0e0e0;font-size:14px; padding:8px;">
+                    <h4 class='text-danger' style="font-size:13px">{{item.fecha}} {{item.diaSemana}} - <span class='text-success'>{{item.hora}}:00</span> </h4>
+                    <span class="badge badge-positive" style="font-size:12px;position:absolute;top:2px;">{{item.nombreCancha}}</span>
+                    <div class="row">
+                        <div class="col">
+                            <label style="font-size:12px;">Precio:</label>
+                            <input type="number" class="box-reserva" id="precio{{$index}}"  onkeyup="format(this)"  ng-value="item.precio" style="width:90%">
+                        </div>
+                        <div class="col">
+                            <label style="font-size:12px;">Abono requerido:</label>
+                            <input type="number" class="box-reserva" id="abonoRequerido{{$index}}"  onkeyup="format(this)" value="0" style="width:90%">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+       
+        
+        <div class="item item-text-wrap">
+            <span style="font-weight: 600;color:#9e9e9e; font-family: 'fg-demi-cond';">Información del cliente</span>
+            <div class="row">
+                        <div class="col">
+                            <label style="font-size:12px;">Teléfono:</label>
+                            <input type="number" class="box-reserva" ng-model="vm.Cliente.telefono" ng-blur="vm.getCliente();" style="width:90%">
+                        </div>
+                        <div class="col">
+                            <div ng-if='vm.Cliente.existe === false'>
+                            <label style="font-size:12px;">Nombres y apellidos:</label>
+                            <input type="text" class="box-reserva" ng-model="vm.Cliente.nombre" style="width:90%">
+                            </div>
+                        </div>
+                    </div>
+           <div ng-if='vm.Cliente.existe === true'>
+                <div class="row" style="margin-top:10px;">
+                    <div class="col col-20" style="padding-left:5px;">
+                        <img src='img/profile-user.png' style='width:50px;height:50px' ng-if="vm.Cliente.image == 0">
+                        <img src='{{vm.Cliente.url}}' style='width:50px;height:50px;border-radius:50%' ng-if="vm.Cliente.image == 1">
+                    </div>
+                    <div class='col col-80' style='text-transform: uppercase;font-size:14px;'>
+                        <div style='margin-top:10px;'>
+                            <h4 style='font-weight:500'>{{vm.Cliente.nombres}} {{vm.Cliente.apellidos}}</h4>
+                            <p>{{vm.Cliente.telefono}}</p>
+                        </div> 
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col'>
+                        <table class="table">
+                            <tr style="border-bottom:1px solid #e0e0e0;">
+                                <th style="text-align: center;"><small class="text-muted">Cumplidas</small></th>
+                                <th style="text-align: center;"><small class="text-muted">Incumplidas</small></th>
+                                <th style="text-align: center;"><small class="text-muted">Canceladas</small></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;padding-top:10px;"><span class="label-danger">{{vm.Cliente.cumplidas}}</span></td>
+                                <td style="text-align: center;"><span class="label-danger">{{vm.Cliente.incumplidas}}</span></td>
+                                <td style="text-align: center;"><span class="label-danger">{{vm.Cliente.canceladas}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>      
+        </div>
+    </ion-content>
+     <div class="bar bar-footer" ng-if="vm.RESERVA.length > 0">
+         <div class="row">
+             <div class="col">
+                 <button class="button icon-left ion-ios-trash button-stable" ng-click="vm.cancelarActualizacion();" ng-if="vm.reservaMover.existe == true">Cancelar Actualización</button>
+                 <button class="button icon-left ion-ios-trash button-stable" ng-click="vm.limpiarReservas();" ng-if="vm.reservaMover.existe == false">Limpiar</button>
+             </div>
+             <div class="col">
+                 <button class="button icon-left ion-loop button-positive" ng-click="vm.actualizarReserva();" ng-if="vm.reservaMover.existe == true">Actualizar Reserva</button>
+                 <button class="button icon-left ion-android-done button-positive" ng-click="vm.reservar();" ng-if="vm.reservaMover.existe == false">Registrar Reserva</button>
+             </div>
+         </div>
+     </div>
+</ion-modal-view>

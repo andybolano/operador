@@ -1,0 +1,42 @@
+<ion-view  view-title="Reservas para hoy" style="background-color:#F3F3F4">
+    <ion-nav-buttons side="right">
+        <a class="button button-icon icon ion-cash" ui-sref="usuario.detalleHoy" style="color:#FFF"></a>
+    </ion-nav-buttons>
+    <div class="bar bar-subheader degrade-birrias-header">
+        <label class="item item-input" style="background-color:#e34243; width: 80%;margin-left:5%;margin-top:-5px;">
+            <i class="icon ion-ios-search placeholder-icon" style='color:#FFF'></i>
+            <input type="text" placeholder="Buscar..." ng-model="filtro" style="color:#FFF;">
+        </label>
+       <b style="width:15%;text-align: center;margin-top:5px;">{{vm.reservas.length}}</b>
+    </div>
+    <ion-content class="has-subheader">
+        <ion-refresher
+            pulling-text="Actualizar Información..."
+            on-refresh="vm.getReservasHoy()">
+        </ion-refresher>
+        <div ng-if="vm.reservas.length == 0" style='text-align: center;padding-top:30%'>
+              <i class='ion-android-radio-button-off vacio'></i>
+            <h4 class='text-info'>No hay reservas para hoy</h4>
+        </div>
+        <div ng-if="vm.reservas.length > 0">
+            <ul class="list">
+                <li class="item" ng-repeat="item in vm.reservas| filter: filtro | orderBy : ['fecha', 'hora'] " style="border-bottom:1px solid #e0e0e0;font-size:14px; padding:8px;" ng-click="vm.viewReserva(item);">
+         
+                        <small ng-if="hora >= item.hora" class="text-success"> En curso..</small>
+                        <small ng-if="item.hora > hora " class="text-danger">Esperando...</small>
+                        <small ng-if="item.hora < hora " class="text-warning">Terminada...</small>
+                    <h4 class='text-danger' style="font-size:13px">{{item.fecha}} {{item.diaSemana}} - <span class='text-success'>{{item.hora}}:00</span> </h4>
+                    {{item.nombres}} {{item.apellidos}} 
+                    <span class="badge badge-positive" style="font-size:12px;position:absolute">{{item.nombrecancha}}</span>
+                </li>
+            </ul>
+        </div>
+    </ion-content>
+ <script id="modalReservaHome.html" type="text/ng-template">
+    <div class="modal">
+       <ion-pane>  
+      <ng-include src="'app/home/modalReserva.html'"></ng-include>
+       </ion-pane>
+    </div>
+</script>
+</ion-view>

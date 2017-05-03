@@ -1,0 +1,70 @@
+<ion-view view-title="Información de hoy" style="background-color:#F3F3F4">
+        <ion-nav-buttons>
+             <a class="button button-icon icon ion-android-arrow-back" ui-sref="usuario.home" style="color:#FFF"></a>
+        </ion-nav-buttons> 
+    <ion-content overflow-scroll="false"  class="has-header">
+   <div ng-if='vm.network == true'>
+         <div class="card">
+  <div class="item item-divider info">
+    Ingresos de hoy
+  </div>
+  <div class="item item-text-wrap">
+      <div class="row">
+          <div class="col" >
+              <p class="num-small text-danger">{{vm.finanzas.realidad | currency:undefined:0}}</p>
+              <small>Reservas</small>
+          </div>
+          <div class="col">
+              <p class="num-small text-primary">{{vm.finanzas.abonos | currency:undefined:0}}</p>
+              <small>Abonos</small>
+          </div>
+          <div class="col" style="text-align: right">
+              <p class="num-big text-success">{{vm.finanzas.abonos + vm.finanzas.realidad | currency:undefined:0}}</p>
+                <small>Total Ingresos:</small> 
+          </div>
+      </div>
+      <div class="row" style="margin-top:10px;">
+          <div class="col" style="text-align: right">
+              <p class="num-big text-info">{{vm.finanzas.expectativa | currency:undefined:0}}</p>
+                <small>Posibles Ingresos:</small> 
+          </div>
+      </div>
+  </div>
+</div>
+  <div class="card">   
+  <div class="item item-divider info">
+    Reservas de hoy
+  </div>
+  <div class="item item-text-wrap">
+      <div class="row">
+        
+          <div class="col">
+              <table width="100%">
+                  <tr>
+                      <td><p class='text-danger'>Espera:</p></td>
+                      <td class='num-min text-danger'>{{vm.estadisticasReservas.espera}}</td>
+                 </tr>
+                 <tr>
+                     <td><p class='text-warning'>Incumplidas:</p> </td> 
+                     <td class='num-min text-warning'>{{vm.estadisticasReservas.incumplidas}}</td>
+                 </tr>
+                 <tr>
+                     <td> <p class='text-info'>Canceladas:</p></td>
+                     <td class='num-min text-info'> {{vm.estadisticasReservas.canceladas}}</td>
+                 </tr>
+        
+             
+              </table>  
+          </div>
+            <div class="col" style="text-align: right">
+              <p class="num-big text-success"> {{vm.estadisticasReservas.cumplidas}}</p>
+                <small>Cumplidas</small> 
+          </div>
+      </div>
+     
+  </div>
+       </div>
+      
+   </div>
+</ion-content>
+</ion-view>
