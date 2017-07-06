@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('cancha')
+        .module('app')
         .service('canchaService',['$http','$q', 'API_URL', '$ionicLoading','$timeout', canchaService]);
 
     /* @ngInject */

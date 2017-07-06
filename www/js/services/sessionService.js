@@ -13,6 +13,7 @@
             getIdUser: getIdUser,
             getIdSitio: getIdSitio,
             getToken : getToken,
+            getRol:getRol
             
         };
         return service;
@@ -27,11 +28,15 @@
               return localStorage.getItem('token');
           } 
         };
+         function getRol(){
+          if(localStorage.getItem('rol') !== null){
+              return localStorage.getItem('rol');
+          } 
+        };
         function getIdUser(){
-           if(localStorage.getItem('data') !== null){
-                var data = JSON.parse(localStorage.getItem('data'));
-                return data.idUsuario;
-           } 
+            if(localStorage.getItem('userId') !== null){
+              return localStorage.getItem('userId');
+          } 
           
         }
         function getIdSitio(){

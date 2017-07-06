@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('cliente')
+        .module('app')
         .service('clienteService', ['$http','$q', 'API_URL', '$ionicLoading','$timeout',clienteService]);
 
     /* @ngInject */

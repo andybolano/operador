@@ -75,6 +75,7 @@
              window.localStorage.setItem('sitioId',data[0].sitio.id);
              window.localStorage.setItem('userId',data[0].id);
              window.localStorage.setItem('email',data[0].email);
+             window.localStorage.setItem('rol',data[0].rol);
              window.localStorage.setItem('token',data[0].token);
              window.localStorage.setItem('userIsLogin',true);
         };
