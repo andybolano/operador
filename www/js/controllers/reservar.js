@@ -298,6 +298,7 @@
                         vm.Cliente.cumplidas = d.data.cliente.cumplidas;
                         vm.Cliente.incumplidas = d.data.cliente.incumplidas;
                         vm.Cliente.canceladas = d.data.cliente.canceladas;
+                        vm.Cliente.resenia = d.data.cliente.resenia;
                         vm.Cliente.telefono = parseInt(d.data.cliente.telefono);
                         vm.Cliente.existe = true;
                     }
@@ -388,9 +389,11 @@
                     }
                     var reserva = {
                         nombre: vm.Cliente.nombre,
+                        resenia:vm.Cliente.resenia,
                         telefono: vm.Cliente.telefono.toString(),
                         reserva: vm.RESERVA,
                         sitio: sessionService.getIdSitio(),
+                        usuario:localStorage.getItem('email'),
                         via: 'LOCAL',
                         tipo: tipo,
                         detalle: detalle

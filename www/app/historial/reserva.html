@@ -39,6 +39,8 @@
                       <span style="font-weight: 600;color:#9e9e9e; font-family: 'fg-demi-cond';">Información de reserva</span>
                       <div class="row">
                           <div class="col">
+                               <p><strong>Via:</strong> {{vm.v_reserva.via}}</p>
+                        <p ng-if="vm.v_reserva.via == 'LOCAL'"><strong>Realizada por:</strong> {{vm.v_reserva.usuario}}</p>
                                   <p> <strong>Cancha:</strong> {{vm.v_reserva.nombrecancha}}</p>
                                   <p> <strong>Fecha:</strong> {{vm.v_reserva.fecha}}</p>
                                   <p class='text-success'> <strong>Hora:</strong> {{vm.v_reserva.hora}}:00</p>
