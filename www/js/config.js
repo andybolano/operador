@@ -11,7 +11,7 @@
              if (window.StatusBar) {
                  StatusBar.styleDefault();
              }
-             /* var push = PushNotification.init({
+              var push = PushNotification.init({
                            android: {
                                    senderID: "991363187494",
                                    vibrate : true,
@@ -22,9 +22,9 @@
                        });
                      push.on('registration', function(data) {
                          window.localStorage.setItem('regId',data.registrationId);
-                     });*/
+                     });
 
-             /*push.on('notification', function(data) {
+             push.on('notification', function(data) {
                  var confirmPopup = $ionicPopup.confirm({
                 title: 'Notificación',
                 template: data.message,
@@ -37,7 +37,7 @@
                     },
                 ]
               });
-          });*/
+          });
 
              autenticate();
          });
@@ -68,8 +68,8 @@
      angular
          .module('app')
          .config(['$httpProvider', config])
-        .constant('API_URL', 'http://localhost/birrias/api/public/index.php/api');
-         //.constant('API_URL', 'https://birriassoccer.com/public/api');
+        //.constant('API_URL', 'http://localhost/birrias/api/public/index.php/api');
+         .constant('API_URL', 'https://birriassoccer.com/public/api');
 
      function config($httpProvider) {
          $httpProvider.interceptors.push('Request');
