@@ -116,6 +116,7 @@
                         abonoRequerido: parseInt(document.getElementById('abonoRequerido' + 0).value.split('.').join('')),
                         fecha: vm.RESERVA[0].fecha,
                         hora: vm.RESERVA[0].hora,
+                        usuario:localStorage.getItem('email'),
                         diaSemana: vm.RESERVA[0].diaSemana,
                         cancha: vm.RESERVA[0].idcancha,
                         idReserva: vm.RESERVA[0].id
@@ -506,6 +507,7 @@
             vm.Cliente.telefono = parseInt(reserva.telefono);
             vm.Cliente.nombres = reserva.nombres;
             vm.Cliente.cumplidas = reserva.cumplidas;
+            vm.Cliente.resenia = reserva.resenia;
             vm.Cliente.incumplidas = reserva.incumplidas;
             vm.Cliente.canceladas = reserva.canceladas;
         }

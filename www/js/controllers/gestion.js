@@ -51,7 +51,7 @@
             vm.fechaHoy = new Date().toDateInputValue();
 
         });
-    var push = PushNotification.init({
+   /* var push = PushNotification.init({
                 android: {
                         senderID: "991363187494",
                         vibrate : true,
@@ -74,7 +74,7 @@
                     },
                 ]
               });
-          });
+          });*/
         function moverReserva(){
              vm.closeModal();
                  vm.v_reserva.estadisticas = vm.v_estadisticas;
