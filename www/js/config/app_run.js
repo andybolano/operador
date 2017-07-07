@@ -14,14 +14,22 @@
                 }
                 
                 
-  /* var push = PushNotification.init({
+   var push = PushNotification.init({
                 android: {
                         senderID: "991363187494",
                         vibrate : true,
                         sound:true,
                         alert: true,
                         badge: true
-                }
+                },
+                 browser: {
+                        pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+                    },
+                ios: {
+		alert: "true",
+		badge: "true",
+		sound: "true"
+                },
             });
             
           push.on('registration', function(data) {
@@ -41,7 +49,7 @@
                     },
                 ]
               });
-          });*/
+          });
           
              autenticate();
             });

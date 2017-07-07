@@ -51,14 +51,20 @@
             vm.fechaHoy = new Date().toDateInputValue();
 
         });
-    var push = PushNotification.init({
+        
+     var push = PushNotification.init({
                 android: {
                         senderID: "991363187494",
                         vibrate : true,
                         sound:true,
                         alert: true,
                         badge: true
-                }
+                },
+                ios: {
+		alert: "true",
+		badge: "true",
+		sound: "true"
+                },
             });
 
          push.on('notification', function(data) {
